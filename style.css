@@ -1,0 +1,319 @@
+/* ============================================
+   Cynthia "Arty" Ng — Personal Profile Page
+   ============================================ */
+
+/* --- Reset & Base --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body { height: 100%; }
+
+body {
+  background-color: #fff;
+  color: #333;
+  font-family: 'Montserrat', 'Proxima Nova', Tahoma, Helvetica, Verdana, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+a { color: #0872b4; text-decoration: none; }
+a:hover { color: #07639c; }
+p { margin-bottom: 0.75em; }
+p:last-child { margin-bottom: 0; }
+
+/* ============================================================
+   SHARED COMPONENT STYLES
+   (defined first so media queries below can override cleanly)
+   ============================================================ */
+
+.profile {
+  background-color: #fff;
+  min-width: 320px;
+  padding: 0;
+  position: relative;
+}
+
+/* Spacing between sections */
+section + section:not(:empty) { margin-top: 30px; }
+.name-headline section + section:not(:empty) { margin-top: 5px; }
+
+/* Name */
+.name {
+  color: #333;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+/* Headline */
+.headline {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.headline .role { display: inline-block; text-transform: capitalize; }
+.location { font-weight: 400; }
+
+/* CTA Button */
+.spotlight .btn {
+  background-color: #513493;
+  border: 1px solid #513493;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  display: block;
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 48px;
+  padding: 0 30px;
+  text-align: center;
+  text-decoration: none !important;
+  transition: box-shadow 0.15s ease-out;
+  user-select: none;
+  white-space: nowrap;
+  width: 100%;
+}
+.spotlight .btn:hover {
+  box-shadow: inset 0 0 0 100px rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+/* Bio */
+.bio { font-size: 16px; text-align: left; word-wrap: break-word; }
+.bio a { color: #333; position: relative; text-decoration: underline; }
+.bio a:hover { color: #888; }
+
+/* Meta */
+.meta-header {
+  color: #999;
+  font-size: 12px;
+  font-weight: 200;
+  letter-spacing: 2px;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+
+ul.meta-sections {
+  display: flex;
+  flex-direction: row;
+  font-size: 14px;
+  justify-content: center;
+  list-style: none;
+}
+ul.meta-sections .meta-item { display: block; }
+ul.meta-sections .meta-item + .meta-item { margin-top: 0.25em; }
+
+/* Social Links — base (mobile-first, centered) */
+.social-links { width: 100%; }
+
+.social-links ul.inline {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  list-style: none;
+}
+
+.social-links li {
+  color: #999;
+  cursor: pointer;
+  display: block;
+  height: 36px;
+  line-height: 36px;
+  padding: 0;
+  width: 36px;
+  opacity: 1;
+  transition: opacity 0.15s ease-in-out;
+}
+.social-links li:hover { opacity: 0.7; }
+.social-links li svg { fill: #999; height: 100%; width: 100%; display: block; }
+.social-links a { display: block; height: 100%; width: 100%; }
+
+/* ============================================================
+   MOBILE LAYOUT  (≤ 800px)
+   Full-width image on top, content scrolls below
+   ============================================================ */
+@media (max-width: 800px) {
+  .profile-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  /* Image header */
+  .head {
+    max-height: 66.6667vh;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .head .image {
+    background-color: #eee;
+    background-image: url('./14595068798_a96c977778_4k.jpg');
+    background-position: 10.0698% 25%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-sizing: border-box;
+    padding-bottom: 40.2832%;
+    width: 100%;
+  }
+
+  /* Name/headline overlaid on image */
+  .head .name-headline {
+    bottom: 0;
+    box-shadow: inset 0 -130px 200px -50px rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    left: 0;
+    padding: 20px;
+    position: absolute;
+    right: 0;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
+    top: 0;
+    width: 100%;
+  }
+  .head .name-headline .name    { color: #fff; }
+  .head .name-headline .headline { color: #fff; }
+
+  /* Scrollable content below image */
+  .body {
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 1;
+  }
+
+  .body-content {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    width: 100%;
+  }
+
+  /* Name hidden from body on mobile — overlay is used */
+  .body .name-headline { display: none; }
+
+  /* Inset: padding only, no pixel max-width */
+  .inset {
+    box-sizing: border-box;
+    padding: 0 24px;
+    width: 100%;
+  }
+
+  /* Meta stacks on small screens */
+  ul.meta-sections { flex-direction: column; }
+  ul.meta-sections .meta-section { width: 100%; }
+  ul.meta-sections .meta-section + .meta-section { margin-top: 20px; }
+
+  /* Side-by-side meta for mid-range (641–800px) */
+  @media (min-width: 641px) {
+    ul.meta-sections { flex-direction: row; }
+    ul.meta-sections .meta-section { padding: 0 5px; width: 50%; }
+  }
+}
+
+/* ============================================================
+   DESKTOP LAYOUT  (≥ 801px)
+   Fixed image on left 66.67%, scrollable content panel right 33.33%
+   ============================================================ */
+@media (min-width: 801px) {
+  .profile-content {
+    align-items: stretch;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
+  }
+
+  /* Left column — creates space for the fixed image */
+  .head {
+    flex-grow: 1;
+    flex-shrink: 1;
+    width: 66.6667%;
+  }
+
+  /* Fixed background image; pixel width kept in sync by JS */
+  .head .image {
+    background-color: #eee;
+    background-image: url('./14595068798_a96c977778_4k.jpg');
+    background-position: 10.0698% 25%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    bottom: 0;
+    left: 0;
+    min-height: 100%;
+    position: fixed;
+    top: 0;
+    width: 66.6667vw; /* overridden by JS on resize */
+  }
+
+  /* Name overlay hidden on desktop */
+  .head .name-headline { display: none; }
+
+  /* Right column — scrollable content */
+  .body {
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 1;
+    justify-content: space-between;
+    padding: 0;
+    text-align: left;
+    width: 33.3333%;
+  }
+
+  .body-content {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding-top: 70px;
+    padding-bottom: 30px;
+    width: 100%;
+  }
+
+  .body-top  { position: sticky; top: 0; }
+  .body-bottom { bottom: 0; position: sticky; }
+
+  /* Inset: padding only, no pixel max-width */
+  .inset {
+    box-sizing: border-box;
+    padding: 0 48px;
+    width: 100%;
+  }
+
+  /* Name shown in body panel on desktop */
+  .body .name-headline { display: block; }
+  .headline .location,
+  .headline .roles { white-space: normal; }
+
+  /* Social links flush-left on desktop */
+  .social-links ul.inline {
+    gap: 25px;
+    justify-content: flex-start;
+  }
+
+  /* Meta sections stack vertically, flush-left */
+  ul.meta-sections {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  ul.meta-sections .meta-section { padding: 0; width: 100%; }
+  ul.meta-sections .meta-section + .meta-section { margin-top: 20px; }
+}
